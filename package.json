@@ -9,8 +9,8 @@
     "start": "node dist/index.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Hoang Anh Kiet",
+  "license": "MIT",
   "dependencies": {
     "@babel/preset-env": "^7.11.0",
     "express": "^4.17.1"
