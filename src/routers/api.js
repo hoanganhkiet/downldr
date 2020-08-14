@@ -33,7 +33,30 @@ apiRouter.get('/youtube/:videoId', (req, res) => {
                         return;
                     }
                 }
-                throw Error('something is wrong');
+                throw Error('Something is wrong');
+            }
+            catch (err) {
+                res.json({ status: 'error', message: err });
+            }
+        })
+        .catch(err => {
+            res.json({ status: 'error', message: err });
+        });
+});
+
+apiRouter.get('/fembed/:videoId', (req, res) => {
+    const videoId = req.params.videoId;
+    axios.post(`https://feurl.com/api/source/${videoId}`)
+        .then(response => {
+            try {
+                if (response.data?.success) {
+                    let data = response?.data?.data;
+                    if (data) {
+                        res.json({ status: 'OK', data: data });
+                        return;
+                    }
+                }
+                throw Error('Something is wrong');
             }
             catch (err) {
                 res.json({ status: 'error', message: err });
