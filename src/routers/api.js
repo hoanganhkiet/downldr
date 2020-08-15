@@ -26,6 +26,10 @@ apiRouter.get('/youtube/:videoId', (req, res) => {
                     data = JSON.parse(data);
                     if (data && data?.streamingData?.formats) {
                         let responseData = data?.streamingData?.formats;
+                        responseData = responseData.map(value => ({
+                            url: value.url,
+                            quality: value.qualityLabel
+                        }));
                         res.json({
                             status: 'OK',
                             data: responseData
@@ -51,6 +55,10 @@ apiRouter.get('/fembed/:videoId', (req, res) => {
             try {
                 if (response.data?.success) {
                     let data = response?.data?.data;
+                    data = data.map(value => ({
+                        url: value.file,
+                        quality: value.label
+                    }));
                     if (data) {
                         res.json({ status: 'OK', data: data });
                         return;
